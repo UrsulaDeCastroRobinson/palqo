@@ -51,7 +51,7 @@ async function weeklyCleanup() {
 }
 
 // API handler for GET requests
-export async function GET {
+export async function GET() {
   try {
     // Call the cleanup logic
     await weeklyCleanup();

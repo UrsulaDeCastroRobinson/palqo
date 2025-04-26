@@ -1,13 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
-import schedule from "node-schedule";
 
 // Supabase configuration
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Function to transfer attendees and reset registers
-async function weeklyCleanup() {
+export default async function handler(req, res) {
   try {
     console.log("Starting cleanup...");
 
@@ -46,12 +44,11 @@ async function weeklyCleanup() {
     if (resetError) throw new Error(`Error resetting spots_taken: ${resetError.message}`);
 
     console.log("Event details reset successfully.");
+
+    // Respond successfully
+    res.status(200).json({ message: "Cleanup completed successfully" });
   } catch (err) {
     console.error(`Error during cleanup: ${err.message}`);
+    res.status(500).json({ error: err.message });
   }
 }
-
-// Schedule the function to run every 5 minutes
-schedule.scheduleJob("*/5 * * * *", weeklyCleanup);
-
-console.log("Cleanup scheduled: Running every 5 minutes.");

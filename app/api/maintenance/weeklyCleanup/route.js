@@ -38,11 +38,16 @@ async function weeklyCleanup() {
     console.log("Attendees table cleared.");
 
     // Step 3: Reset spots_taken in event_details
-    const { error: resetError } = await supabase
-      .from("event_details")
-      .update({ spots_taken: 0 });
+	const { error: resetError } = await supabase
+	  .from("event_details")
+	  .update({ spots_taken: 0 })
+	  .eq("id", 1); // Target the row with id = 1
 
-    if (resetError) throw new Error(`Error resetting spots_taken: ${resetError.message}`);
+	if (resetError) {
+	  console.error("Error resetting spots_taken:", resetError.message);
+	} else {
+	  console.log("Successfully reset spots_taken to 0 for id = 1.");
+	}
 
     console.log("Event details reset successfully.");
   } catch (err) {

@@ -5,7 +5,8 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-export default async function handler(req, res) {
+// Function to transfer attendees and reset registers
+async function weeklyCleanup() {
   try {
     console.log("Starting cleanup...");
 
@@ -44,11 +45,29 @@ export default async function handler(req, res) {
     if (resetError) throw new Error(`Error resetting spots_taken: ${resetError.message}`);
 
     console.log("Event details reset successfully.");
-
-    // Respond successfully
-    res.status(200).json({ message: "Cleanup completed successfully" });
   } catch (err) {
     console.error(`Error during cleanup: ${err.message}`);
-    res.status(500).json({ error: err.message });
+  }
+}
+
+// API handler for GET requests
+export async function GET(req) {
+  try {
+    // Call the cleanup logic
+    await weeklyCleanup();
+
+    // Return success response
+    return new Response(JSON.stringify({ message: "Weekly cleanup executed successfully!" }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.error("Error executing weekly cleanup:", error);
+
+    // Return error response
+    return new Response(JSON.stringify({ error: "An error occurred during cleanup." }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }

@@ -1,7 +1,7 @@
 {
   "crons": [
     {
-      "path": "/api/maintenance/weeklyCleanup/route.js",
+      "path": "/api/maintenance/weeklyCleanup",
       "schedule": "30 20 * * *" 
     }
   ]

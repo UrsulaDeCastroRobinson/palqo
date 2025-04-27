@@ -6,7 +6,7 @@
     },
     {
       "path": "/api/maintenance/sendWeeklyEmails",
-      "schedule": "0 17 * * 3" // Every Wednesday at 5:00 PM (UTC)
+      "schedule": "0 17 * * 3" 
     }
   ]
 }

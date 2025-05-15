@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/maintenance/weeklyCleanup",
-      "schedule": "30 12 * * 7"
+      "schedule": "30 12 * * 0"
     },
     {
       "path": "/api/maintenance/sendWeeklyEmails",

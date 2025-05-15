@@ -1,10 +1,10 @@
 export const calculateEventDate = () => {
   const today = new Date();
   const dayOfWeek = today.getDay();
-  const daysUntilSaturday = 6 - dayOfWeek;
-  const upcomingSaturday = new Date(today);
-  upcomingSaturday.setDate(today.getDate() + daysUntilSaturday);
-  return upcomingSaturday;
+  const daysUntilSunday = 7 - dayOfWeek;
+  const upcomingSunday = new Date(today);
+  upcomingSunday.setDate(today.getDate() + daysUntilSunday);
+  return upcomingSunday;
 };
 
 export const formatDate = (date) => {

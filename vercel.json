@@ -2,11 +2,11 @@
   "crons": [
     {
       "path": "/api/maintenance/weeklyCleanup",
-      "schedule": "30 12 * * 6"
+      "schedule": "30 12 * * 7"
     },
     {
       "path": "/api/maintenance/sendWeeklyEmails",
-      "schedule": "0 17 * * 3" 
+      "schedule": "0 17 * * 5" 
     }
   ]
 }

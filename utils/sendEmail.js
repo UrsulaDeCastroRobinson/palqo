@@ -17,8 +17,8 @@ const sendEmail = async (recipientEmail, recipientName) => {
     from: process.env.EMAIL_USER,
     to: recipientEmail,
 	cc: 'tom.hosted@gmail.com',
-    subject: 'Sound meditation - registration confirmation',
-    text: `Hello ${recipientName},\n\nThank you for registering for the sound meditation at 11 a.m. on ${formattedEventDate}.\n\nThe address is Flat 003, 350 The Highway, E1W 3HU.\n\nWhen you arrive, please call me on 079020 75244 to let you in as intercom doesn't work.\n\nSo that the meditation is not interrupted, please do not bring animals or young children.\n\nThis is a free, community event.\n\nPeace out,\nTom`,
+    subject: 'Chamber music - registration confirmation',
+    text: `Hello ${recipientName},\n\nThank you for registering for chamber music at 11 a.m. on ${formattedEventDate}.\n\nThe address is Flat 003, 350 The Highway, E1W 3HU.\n\nWhen you arrive, please call me on 079020 75244 to let you in as intercom doesn't work.\n\nThis is a free, community event.\n\nPeace out,\nTom`,
   };
 
   try {
@@ -44,8 +44,8 @@ const sendEmail = async (recipientEmail, recipientName) => {
       const reminderMailOptions = {
         from: process.env.EMAIL_USER,
         to: recipientEmail,
-        subject: 'Sound bath tomorrow',
-        text: `Hello ${recipientName},\n\nThis is a reminder about the sound bath at 11 a.m. tomorrow ( ${formattedEventDate} ).\n\nLooking forward to the vibrations!\n\nPeace out,\nTom`,
+        subject: 'Chamber music tomorrow',
+        text: `Hello ${recipientName},\n\nThis is a reminder about chamber music tomorrow ( ${formattedEventDate} ).\n\nLooking forward to the vibrations!\n\nPeace out,\nTom`,
       };
 
       try {

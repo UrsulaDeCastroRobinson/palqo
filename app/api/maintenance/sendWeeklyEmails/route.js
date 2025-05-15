@@ -5,13 +5,13 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-const getUpcomingSaturday = () => {
+const getupcomingSunday = () => {
   const today = new Date();
   const dayOfWeek = today.getDay();
-  const daysUntilSaturday = 6 - dayOfWeek;
-  const upcomingSaturday = new Date(today);
-  upcomingSaturday.setDate(today.getDate() + daysUntilSaturday);
-  return upcomingSaturday.toLocaleDateString('en-GB', {
+  const daysUntilSunday = 7 - dayOfWeek;
+  const upcomingSunday = new Date(today);
+  upcomingSunday.setDate(today.getDate() + daysUntilSunday);
+  return upcomingSunday.toLocaleDateString('en-GB', {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -48,23 +48,23 @@ export async function GET() {
       (masterAttendee) => !attendeeEmails.has(masterAttendee.email)
     );
 
-    // Get the upcoming Saturday's date
-    const upcomingSaturday = getUpcomingSaturday();
+    // Get the upcoming Sunday's date
+    const upcomingSunday = getupcomingSunday();
 
     // Prepare email data for non-registered attendees
     const emailsForNonRegisteredAttendees = nonRegisteredAttendees.map((person) => ({
       email: person.email,
       name: person.name,
-      subject: `Reminder: Sound Meditation Event on ${upcomingSaturday}`,
-      text: `Hello ${person.name},\n\nThis is a reminder about the upcoming sound meditation event this Saturday, ${upcomingSaturday}.\n\nIf you'd like to attend, please register here https://soundmeditation.vercel.app/ to reserve your spot.\n\nPeace out,\nTom`,
+      subject: `Reminder: Chamber Music Event on ${upcomingSunday}`,
+      text: `Hello ${person.name},\n\nThis is a reminder about the chamber event this Sunday, ${upcomingSunday}.\n\nIf you'd like to attend, please register here https://palqo.vercel.app/ to reserve your spot.\n\nPeace out,\nTom`,
     }));
 
     // Prepare email data for registered attendees
     const emailsForRegisteredAttendees = attendees.map((person) => ({
       email: person.email,
       name: person.name,
-      subject: `Reminder: sound bath on ${upcomingSaturday}`,
-      text: `Hello ${person.name},\n\nThis is a reminder that you are registered for the sound bath this Saturday, ${upcomingSaturday}.\n\nLooking forward to seeing you there!\n\nPeace out,\nTom`,
+      subject: `Reminder: chamber music on ${upcomingSunday}`,
+      text: `Hello ${person.name},\n\nThis is a reminder that you are registered for the chamber music this Sunday, ${upcomingSunday}.\n\nLooking forward to seeing you there!\n\nPeace out,\nTom`,
     }));
 
     // Combine both groups into one email list

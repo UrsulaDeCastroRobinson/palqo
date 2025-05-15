@@ -10,11 +10,11 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { name, email } = body;
+    const { name, email, instrument } = body;
 
     if (!name || !email) {
       return NextResponse.json(
-        { error: "Name, and email are required." },
+        { error: "Name, email, and instrument are required." },
         { status: 400 }
       );
     }
@@ -22,7 +22,7 @@ export async function POST(req) {
     // Fetch attendees to check for duplicates
     const { data: attendees, error: fetchError } = await supabase
       .from("attendees")
-      .select("name, email");
+      .select("name, email, instrument");
 
     if (fetchError) {
       console.error("Error fetching attendees:", fetchError);
@@ -44,7 +44,7 @@ export async function POST(req) {
     // Insert the new attendee
     const { data: attendeeData, error: insertError } = await supabase
       .from("attendees")
-      .insert([{ name, email }]);
+      .insert([{ name, email, instrument }]);
 
     if (insertError) {
       console.error("Error inserting attendee:", insertError);

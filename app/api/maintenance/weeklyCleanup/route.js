@@ -23,6 +23,7 @@ async function weeklyCleanup() {
         .upsert({
           name: attendee.name,
           email: attendee.email,
+		  instrument: attendee.instrument,
           event_date: attendee.event_date, // Ensure this column exists in your master_attendees table
         });
 

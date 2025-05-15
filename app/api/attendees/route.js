@@ -12,7 +12,7 @@ export async function GET() {
     // Fetch attendees from the Supabase table
     const { data: attendees, error } = await supabase
       .from("attendees")
-      .select("id, name"); 
+      .select("id, name, instrument"); 
 
     if (error) {
       console.error("Error fetching attendees:", error.message);
